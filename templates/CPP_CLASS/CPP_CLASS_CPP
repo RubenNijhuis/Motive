@@ -1,0 +1,35 @@
+#include "{{name}}.hpp"
+
+{{name}}::{{name}}(void)
+{
+    std::cout << "{{name}} created with an empty construcor" << std::endl;
+
+    this->_type = "{{name}}";
+
+    return;
+}
+
+{{name}}::~{{name}}(void)
+{
+    std::cout << "{{name}} " << this->_type << " deconstructed" << std::endl;
+    return;
+}
+
+{{name}}::{{name}}(const {{name}}& other)
+{
+    std::cout << "{{name}} created by copy" << std::endl;
+    *this = other;
+    return;
+}
+
+{{name}}& {{name}}::operator=(const {{name}}& other)
+{
+    std::cout << "{{name}} created by assertion" << std::endl;
+
+    if (this != &other)
+    {
+        this->_type = other._type;
+    }
+
+    return (*this);
+}

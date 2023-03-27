@@ -1,0 +1,14 @@
+#ifndef {{name_uppercase}}_HPP
+# define {{name_uppercase}}_HPP
+
+class {{name}}
+{
+	public:
+		{{name}}(void);
+		{{name}}(const {{name}}& other);
+		~{{name}}(void);
+
+		{{name}} &operator=(const {{name}}& other);
+};
+
+#endif
