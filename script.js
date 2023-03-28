@@ -45,17 +45,13 @@ const getTemplateDetails = () => {
       }
 
       // Ask said questions
-      prompt(otherTemplateDetailsQuestions)
-        .then((answer) => {
-          for (const [answerKey, answerValue] of Object.entries(answer)) {
-            const [answerKeyFile, answerKeyFileOption] = answerKey.split("-");
+      prompt(otherTemplateDetailsQuestions).then((answer) => {
+        for (const [answerKey, answerValue] of Object.entries(answer)) {
+          const [answerKeyFile, answerKeyFileOption] = answerKey.split("-");
 
-            templateOptions[answerKeyFile][answerKeyFileOption] = answerValue;
-          }
-        })
-        .finally(() => {
-          console.log(templateOptions);
-        });
+          templateOptions[answerKeyFile][answerKeyFileOption] = answerValue;
+        }
+      });
     }
   };
 
@@ -66,7 +62,7 @@ const getTemplateDetails = () => {
     // Place the general keys in the template options
     for (const fileName of filesInTemplate) {
       if (fileName === "options.json") continue;
-        templateOptions[fileName] = { ...generalOptions };
+      templateOptions[fileName] = { ...generalOptions };
     }
 
     // Create questions for each general input key
