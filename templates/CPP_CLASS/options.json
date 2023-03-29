@@ -2,7 +2,11 @@
   "general": {
     "name": "text"
   },
+  "CPP_CLASS_CPP": {
+    "extension": "cpp"
+  },
   "CPP_CLASS_HPP": {
-    "name_uppercase": "text"
+    "name_uppercase": "text",
+    "extension": "hpp"
   }
 }

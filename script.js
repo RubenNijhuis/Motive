@@ -15,6 +15,8 @@ const prompt = inquirer.createPromptModule();
 let selectedTemplate = "";
 let templateOptions = {};
 
+let templateOutput = [];
+
 const getTemplateDetails = () => {
   const selectedTemplatePath = path.join(
     __dirname,
@@ -28,6 +30,28 @@ const getTemplateDetails = () => {
   const unparsedOptions = JSON.parse(templateDetails);
   const filesInTemplate = fs.readdirSync(selectedTemplatePath);
 
+  const generateTemplatesFromInput = () => {
+    for (const file of filesInTemplate) {
+      if (file === "options.json") continue;
+
+      const templateFileContent = fs.readFileSync(
+        path.join(selectedTemplatePath, file),
+        { encoding: "utf-8" }
+      );
+
+      templateOutput.push({
+        name: `${templateOptions[file].name}.${templateOptions[file].extension}`,
+        content: Mustache.render(templateFileContent, templateOptions[file]),
+      });
+    }
+
+    templateOutput.forEach((file) => {
+      fs.writeFileSync(path.join(PWD, file.name), file.content, (err) => {
+        if (err) console.error(err);
+      });
+    });
+  };
+
   const getOtherTemplateDetails = () => {
     let otherTemplateDetailsQuestions = [];
 
@@ -37,22 +61,27 @@ const getTemplateDetails = () => {
       for (const [fileQuestion, _] of Object.entries(
         unparsedOptions[fileKey]
       )) {
+        if (fileQuestion === "extension") continue;
+
         otherTemplateDetailsQuestions.push({
           type: "input",
           name: `${fileKey}-${fileQuestion}`,
           message: `Please provide ${fileQuestion}:`,
         });
       }
+    }
 
-      // Ask said questions
-      prompt(otherTemplateDetailsQuestions).then((answer) => {
+    // Ask said questions
+    prompt(otherTemplateDetailsQuestions)
+      .then((answer) => {
         for (const [answerKey, answerValue] of Object.entries(answer)) {
           const [answerKeyFile, answerKeyFileOption] = answerKey.split("-");
-
           templateOptions[answerKeyFile][answerKeyFileOption] = answerValue;
         }
+      })
+      .finally(() => {
+        generateTemplatesFromInput();
       });
-    }
   };
 
   if (unparsedOptions.general) {
@@ -63,6 +92,11 @@ const getTemplateDetails = () => {
     for (const fileName of filesInTemplate) {
       if (fileName === "options.json") continue;
       templateOptions[fileName] = { ...generalOptions };
+
+      if (unparsedOptions[fileName].extension) {
+        templateOptions[fileName].extension =
+          unparsedOptions[fileName].extension;
+      }
     }
 
     // Create questions for each general input key
