@@ -1,4 +1,4 @@
-## Templater
+## Motive
 
 <img src="./assets/terminal-example.png">
 
