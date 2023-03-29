@@ -1,0 +1,9 @@
+import react from 'react';
+
+const {{ name }} = () => {
+    return (
+        <div>Hello from {{ name }}</div>
+    )
+}
+
+export default {{ name }};

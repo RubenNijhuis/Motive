@@ -1,0 +1,11 @@
+{
+  "general": {
+    "name": "text"
+  },
+  "REACT_COMPONENT": {
+    "extension": "tsx"
+  },
+  "EXPORTER_FILE": {
+    "extension": "tsx"
+  }
+}
