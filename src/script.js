@@ -6,7 +6,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 
-const templateFolder = path.join(__dirname, "templates");
+const templateFolder = path.join(__dirname, "..", "templates");
 
 const templateNames = fs.readdirSync(templateFolder);
 
@@ -18,11 +18,7 @@ let templateOptions = {};
 let templateOutput = [];
 
 const getTemplateDetails = () => {
-  const selectedTemplatePath = path.join(
-    __dirname,
-    "templates",
-    selectedTemplate
-  );
+  const selectedTemplatePath = path.join(templateFolder, selectedTemplate);
 
   const optionsFile = path.join(selectedTemplatePath, "options.json");
 
