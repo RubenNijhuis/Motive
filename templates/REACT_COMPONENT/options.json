@@ -1,11 +1,19 @@
 {
-  "general": {
-    "name": "text"
-  },
-  "REACT_COMPONENT": {
-    "extension": "tsx"
-  },
-  "EXPORTER_FILE": {
-    "extension": "tsx"
-  }
+	"general": {
+		"name": "What is the name of the component?"
+	},
+	"files": {
+		"REACT_COMPONENT": {
+			"config": {
+				"fileName": "name",
+				"extension": ".tsx"
+			}
+		},
+		"EXPORTER_FILE": {
+			"config": {
+				"fileName": "index",
+				"extension": ".tsx"
+			}
+		}
+	}
 }

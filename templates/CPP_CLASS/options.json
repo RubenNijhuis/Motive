@@ -1,12 +1,22 @@
 {
-  "general": {
-    "name": "text"
-  },
-  "CPP_CLASS_CPP": {
-    "extension": "cpp"
-  },
-  "CPP_CLASS_HPP": {
-    "name_uppercase": "text",
-    "extension": "hpp"
-  }
+	"general": {
+		"name": "What is the name of the class?"
+	},
+	"files": {
+		"CPP_CLASS_CPP": {
+			"config": {
+                "fileName": "name",
+				"extension": ".cpp"
+			}
+		},
+		"CPP_CLASS_HPP": {
+			"values": {
+				"name_upppercase": "What is the class name in uppercase?"
+			},
+			"config": {
+                "fileName": "name",
+				"extension": ".hpp"
+			}
+		}
+	}
 }

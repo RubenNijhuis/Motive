@@ -1,16 +1,25 @@
 {
-  "name": "Motive",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "inquirer": "^8.2.5",
-    "mustache": "^4.2.0"
-  }
+	"name": "motive",
+	"version": "1.0.0",
+	"description": "A simple template generator",
+	"main": "script.js",
+	"scripts": {
+		"build": "npx tsc",
+		"test": "node ./dist/script.js"
+	},
+    "bin": "./dist/script.js",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+    "type": "module",
+	"dependencies": {
+		"inquirer": "^8.2.5",
+		"mustache": "^4.2.0"
+	},
+	"devDependencies": {
+		"@types/inquirer": "^9.0.3",
+		"@types/mustache": "^4.2.2",
+		"@types/node": "^18.15.11",
+		"typescript": "^5.0.3"
+	}
 }
