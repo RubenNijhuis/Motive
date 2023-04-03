@@ -1,22 +1,37 @@
 {
-	"general": {
-		"name": "What is the name of the class?"
+	"global": {
+		"questions": [
+			{
+				"type": "input",
+				"name": "name",
+				"message": "What is the name of the class?"
+			}
+		],
+		"config": {
+			"fileName": "{{name}}"
+		}
 	},
-	"files": {
-		"CPP_CLASS_CPP": {
+	"files": [
+		{
+			"template": "CPP_CLASS_CPP",
+			"name": "cpp class",
 			"config": {
-                "fileName": "name",
 				"extension": ".cpp"
 			}
 		},
-		"CPP_CLASS_HPP": {
-			"values": {
-				"name_upppercase": "What is the class name in uppercase?"
-			},
+		{
+			"template": "CPP_CLASS_HPP",
+			"name": "hpp class",
+			"questions": [
+				{
+					"type": "confirm",
+					"name": "method",
+					"message": "With funky method"
+				}
+			],
 			"config": {
-                "fileName": "name",
 				"extension": ".hpp"
 			}
 		}
-	}
+	]
 }

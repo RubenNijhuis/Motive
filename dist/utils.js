@@ -16,21 +16,24 @@ import TemplateFile from "./TemplateFile.js";
 export const getFilesFromTemplateOptions = async (templateDirectory, options) => {
     try {
         let templateFiles = [];
-        let generalAnswered;
-        if (options.general) {
-            generalAnswered = await askListOfQuestions(options.general);
+        let globalAnswered = null;
+        // If there are questions in the general
+        if (options.global?.questions?.length) {
+            globalAnswered = await askListOfQuestions(options.global.questions);
         }
-        else {
-            generalAnswered = {};
-        }
-        for (const [fileName, value] of Object.entries(options.files)) {
-            const filePath = path.join(templateDirectory, fileName);
-            templateFiles.push(new TemplateFile({
-                generalAnswered,
-                name: fileName,
+        for (const templateConfig of options.files) {
+            const filePath = path.join(templateDirectory, templateConfig.template);
+            const template = new TemplateFile({
                 filePath,
-                fileConfig: value,
-            }));
+                templateConfig,
+            });
+            if (globalAnswered) {
+                template.addGlobalAnswers(globalAnswered);
+            }
+            if (options.global?.config) {
+                template.addGlobalConfig(options.global.config);
+            }
+            templateFiles.push(template);
         }
         return templateFiles;
     }
@@ -55,5 +58,15 @@ export const getOptionsConfig = async (selectedTemplatePath) => {
     catch (err) {
         throw err;
     }
+};
+export const isVariableName = (str) => {
+    // Check if variable is formatted like {{name}}
+    const trimmed = str.replace(/\s/g, "");
+    const startsWith = trimmed.startsWith("{{");
+    const endsWith = trimmed.endsWith("}}");
+    return {
+        name: str.slice(2, -2),
+        isVariable: startsWith && endsWith,
+    };
 };
 //# sourceMappingURL=utils.js.map

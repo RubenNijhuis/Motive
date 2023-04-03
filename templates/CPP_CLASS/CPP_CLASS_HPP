@@ -1,5 +1,5 @@
-#ifndef {{name_uppercase}}_HPP
-# define {{name_uppercase}}_HPP
+#ifndef {{loud name}}_HPP
+# define {{loud name}}_HPP
 
 class {{name}}
 {

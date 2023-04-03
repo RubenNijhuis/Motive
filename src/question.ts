@@ -1,5 +1,5 @@
-import inquirer from "inquirer";
-import { QuestionList } from "./types.js";
+import inquirer, { Question } from "inquirer";
+import { AnswerList } from "./types.js";
 
 const askTemplateName = async (templateNames: string[]): Promise<string> => {
 	try {
@@ -17,20 +17,10 @@ const askTemplateName = async (templateNames: string[]): Promise<string> => {
 };
 
 const askListOfQuestions = async (
-	questions: QuestionList
-): Promise<QuestionList> => {
+	questions: Question[]
+): Promise<AnswerList> => {
 	try {
-		let questionsList: any[] = [];
-
-        for (const [key, value] of Object.entries(questions)) {
-			questionsList.push({
-				type: "input",
-				name: key,
-                message: value,
-			});
-		}
-
-		const response = await inquirer.prompt(questionsList);
+		const response = await inquirer.prompt(questions);
 		return response;
 	} catch (err) {
 		throw err;

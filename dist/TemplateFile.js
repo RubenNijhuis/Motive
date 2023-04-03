@@ -1,24 +1,44 @@
-import { askListOfQuestions } from "./question.js";
-import Mustache from "mustache";
 import path from "path";
 import fs from "fs";
+import Handlebars from "handlebars";
+import { askListOfQuestions } from "./question.js";
+import { isVariableName } from "./utils.js";
 class TemplateFile {
-    constructor({ generalAnswered, name, filePath, fileConfig, }) {
-        this.name = name;
+    constructor({ templateConfig, filePath, }) {
+        this.templateConfig = templateConfig;
         this.filePath = filePath;
-        if (fileConfig.values !== undefined) {
-            this.questions = fileConfig.values;
-        }
-        else {
-            this.questions = null;
-        }
-        if (fileConfig)
-            this.fileConfig = fileConfig;
+        this.questions = templateConfig.questions || null;
         this.preContent = fs.readFileSync(this.filePath, { encoding: "utf-8" });
-        if (generalAnswered) {
-            this.answers = generalAnswered;
-        }
         this.hasAnswered = false;
+    }
+    getFileName() {
+        let fileName = "";
+        if (this.templateConfig.config?.fileName) {
+            const { name, isVariable } = isVariableName(this.templateConfig.config.fileName);
+            // If its formatted like {{name}} we get it from our
+            // answers which can be merged from global and local
+            if (isVariable) {
+                if (this.answers) {
+                    fileName += this.answers[name] || "";
+                }
+            }
+            else {
+                fileName += name;
+            }
+        }
+        if (this.templateConfig.config?.extension) {
+            fileName += this.templateConfig.config.extension;
+        }
+        return fileName;
+    }
+    addGlobalAnswers(answers) {
+        this.answers = { ...answers };
+    }
+    addGlobalConfig(config) {
+        this.templateConfig.config = {
+            ...config,
+            ...this.templateConfig.config,
+        };
     }
     async getAnswers() {
         if (this.questions) {
@@ -28,26 +48,19 @@ class TemplateFile {
         this.hasAnswered = true;
     }
     async renderOutput(outputFolder) {
-        if (!this.answers) {
-            throw new Error(`No answers give yet for ${this.name}`);
+        if (!this.hasAnswered) {
+            throw new Error(`No answers give yet for ${this.templateConfig.template}`);
         }
-        const rendered = Mustache.render(this.preContent, this.answers);
-        let fileName = this.name;
-        if (this.fileConfig?.config?.fileName) {
-            if (this.answers[this.fileConfig.config.fileName]) {
-                fileName = this.answers[this.fileConfig.config.fileName];
-            }
-            else {
-                fileName = this.fileConfig.config.fileName;
-                console.log(`The key ${this.fileConfig.config.fileName} for ${this.name} wasn't found so the filename defaulted to "${this.fileConfig.config.fileName}"`);
-            }
-        }
-        fileName += this.fileConfig?.config?.extension
-            ? this.fileConfig?.config.extension
-            : "";
+        Handlebars.registerHelper('loud', (str) => {
+            return str.toUpperCase();
+        });
+        const template = Handlebars.compile(this.preContent);
+        const rendered = template(this.answers);
+        const fileName = this.getFileName();
         const outputPath = path.join(outputFolder, fileName);
         fs.writeFileSync(outputPath, rendered);
     }
 }
+///////////////////////////////////////////////////////////////////////////////
 export default TemplateFile;
 //# sourceMappingURL=TemplateFile.js.map

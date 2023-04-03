@@ -43,10 +43,12 @@ try {
 
 	for (const file of templateFiles) {
 		await file.renderOutput(pwd);
-	}
+    }
+
 } catch (err) {
     if (err instanceof Error) {
         console.error(`Error: ${err.message}`);
+        console.error(err);
     } else {
         console.log(err);
     }

@@ -15,15 +15,7 @@ const askTemplateName = async (templateNames) => {
 };
 const askListOfQuestions = async (questions) => {
     try {
-        let questionsList = [];
-        for (const [key, value] of Object.entries(questions)) {
-            questionsList.push({
-                type: "input",
-                name: key,
-                message: value,
-            });
-        }
-        const response = await inquirer.prompt(questionsList);
+        const response = await inquirer.prompt(questions);
         return response;
     }
     catch (err) {

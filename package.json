@@ -7,18 +7,17 @@
 		"build": "npx tsc",
 		"test": "node ./dist/index.js"
 	},
-    "bin": "./dist/index.js",
+	"bin": "./dist/index.js",
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-    "type": "module",
+	"type": "module",
 	"dependencies": {
-		"inquirer": "^8.2.5",
-		"mustache": "^4.2.0"
+		"handlebars": "^4.7.7",
+		"inquirer": "^8.2.5"
 	},
 	"devDependencies": {
 		"@types/inquirer": "^9.0.3",
-		"@types/mustache": "^4.2.2",
 		"@types/node": "^18.15.11",
 		"typescript": "^5.0.3"
 	}
