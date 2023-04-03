@@ -23,7 +23,7 @@ class TemplateFile {
                 }
             }
             else {
-                fileName += name;
+                fileName += this.templateConfig.config.fileName;
             }
         }
         if (this.templateConfig.config?.extension) {

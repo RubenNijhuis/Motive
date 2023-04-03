@@ -38,8 +38,8 @@ export const getFilesFromTemplateOptions = async (
 			const filePath = path.join(
 				templateDirectory,
 				templateConfig.template
-            );
-            
+			);
+
 			const template = new TemplateFile({
 				filePath,
 				templateConfig,
@@ -91,13 +91,22 @@ export const getOptionsConfig = async (
 export const isVariableName = (
 	str: string
 ): { name: string; isVariable: boolean } => {
+	let returnable = {
+		name: "",
+		isVariable: false,
+	};
+
 	// Check if variable is formatted like {{name}}
 	const trimmed = str.replace(/\s/g, "");
 	const startsWith = trimmed.startsWith("{{");
 	const endsWith = trimmed.endsWith("}}");
 
-	return {
-		name: str.slice(2, -2),
-		isVariable: startsWith && endsWith,
-	};
+	const isVariableName = startsWith && endsWith;
+
+	if (isVariableName) {
+		returnable.isVariable = true;
+		returnable.name = str.slice(2, -2);
+	}
+
+	return returnable;
 };

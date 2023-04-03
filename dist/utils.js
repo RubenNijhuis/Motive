@@ -60,13 +60,19 @@ export const getOptionsConfig = async (selectedTemplatePath) => {
     }
 };
 export const isVariableName = (str) => {
+    let returnable = {
+        name: "",
+        isVariable: false,
+    };
     // Check if variable is formatted like {{name}}
     const trimmed = str.replace(/\s/g, "");
     const startsWith = trimmed.startsWith("{{");
     const endsWith = trimmed.endsWith("}}");
-    return {
-        name: str.slice(2, -2),
-        isVariable: startsWith && endsWith,
-    };
+    const isVariableName = startsWith && endsWith;
+    if (isVariableName) {
+        returnable.isVariable = true;
+        returnable.name = str.slice(2, -2);
+    }
+    return returnable;
 };
 //# sourceMappingURL=utils.js.map

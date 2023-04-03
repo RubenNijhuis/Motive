@@ -54,7 +54,7 @@ class TemplateFile {
 					fileName += this.answers[name] || "";
 				}
 			} else {
-				fileName += name;
+				fileName += this.templateConfig.config.fileName;
 			}
 		}
 

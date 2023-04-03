@@ -22,13 +22,6 @@
 		{
 			"template": "CPP_CLASS_HPP",
 			"name": "hpp class",
-			"questions": [
-				{
-					"type": "confirm",
-					"name": "method",
-					"message": "With funky method"
-				}
-			],
 			"config": {
 				"extension": ".hpp"
 			}
