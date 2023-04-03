@@ -1,13 +1,13 @@
 {
 	"name": "motive",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A simple template generator",
-	"main": "script.js",
+	"main": "index.js",
 	"scripts": {
 		"build": "npx tsc",
-		"test": "node ./dist/script.js"
+		"test": "node ./dist/index.js"
 	},
-    "bin": "./dist/script.js",
+    "bin": "./dist/index.js",
 	"keywords": [],
 	"author": "",
 	"license": "ISC",

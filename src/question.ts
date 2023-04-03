@@ -26,7 +26,7 @@ const askListOfQuestions = async (
 			questionsList.push({
 				type: "input",
 				name: key,
-				message: value,
+                message: value,
 			});
 		}
 

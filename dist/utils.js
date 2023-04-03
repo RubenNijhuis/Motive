@@ -1,33 +1,59 @@
+// Node
 import fs from "fs";
 import path from "path";
+// Prompt utils
 import { askListOfQuestions } from "./question.js";
+// Template handler
 import TemplateFile from "./TemplateFile.js";
+////////////////////////////////////////////////////////////////////////////////
+/**
+ * Generates template file classes from the options file
+ *
+ * @param templateDirectory
+ * @param options
+ * @returns
+ */
 export const getFilesFromTemplateOptions = async (templateDirectory, options) => {
-    let templateFiles = [];
-    let generalAnswered;
-    if (options.general) {
-        generalAnswered = await askListOfQuestions(options.general);
+    try {
+        let templateFiles = [];
+        let generalAnswered;
+        if (options.general) {
+            generalAnswered = await askListOfQuestions(options.general);
+        }
+        else {
+            generalAnswered = {};
+        }
+        for (const [fileName, value] of Object.entries(options.files)) {
+            const filePath = path.join(templateDirectory, fileName);
+            templateFiles.push(new TemplateFile({
+                generalAnswered,
+                name: fileName,
+                filePath,
+                fileConfig: value,
+            }));
+        }
+        return templateFiles;
     }
-    else {
-        generalAnswered = {};
+    catch (err) {
+        throw err;
     }
-    for (const [fileName, value] of Object.entries(options.files)) {
-        const filePath = path.join(templateDirectory, fileName);
-        templateFiles.push(new TemplateFile({
-            generalAnswered,
-            name: fileName,
-            filePath,
-            fileConfig: value,
-        }));
-    }
-    return templateFiles;
 };
-export const getOptionsConfig = (selectedTemplatePath) => {
-    const templateOptionsPath = path.join(selectedTemplatePath, "options.json");
-    const optionsContent = fs.readFileSync(templateOptionsPath, {
-        encoding: "utf-8",
-    });
-    const templateOptions = JSON.parse(optionsContent);
-    return templateOptions;
+/**
+ *
+ * @param selectedTemplatePath
+ * @returns
+ */
+export const getOptionsConfig = async (selectedTemplatePath) => {
+    try {
+        const templateOptionsPath = path.join(selectedTemplatePath, "options.json");
+        let optionsContent = fs.readFileSync(templateOptionsPath, {
+            encoding: "utf-8",
+        });
+        const templateOptions = JSON.parse(optionsContent);
+        return templateOptions;
+    }
+    catch (err) {
+        throw err;
+    }
 };
 //# sourceMappingURL=utils.js.map

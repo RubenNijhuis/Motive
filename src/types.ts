@@ -7,6 +7,7 @@ export interface AnswerList {
 }
 
 export interface FileConfig {
+    template: string;
 	values?: QuestionList;
     config?: {
         fileName: string;
@@ -18,7 +19,5 @@ export interface OptionsConfig {
 	general?: {
 		[key: string]: string;
 	};
-	files: {
-		[key: string]: FileConfig;
-	};
+    files: FileConfig[];
 }
