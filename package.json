@@ -1,5 +1,5 @@
 {
-	"name": "motive",
+	"name": "@rubennijhuis/motive",
 	"version": "1.0.1",
 	"description": "A simple template generator",
 	"main": "index.js",
@@ -7,9 +7,15 @@
 		"build": "npx tsc",
 		"test": "node ./dist/index.js"
 	},
-	"bin": "./dist/index.js",
-	"keywords": [],
-	"author": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RubenNijhuis/Motive.git"
+    },
+	"bin": {
+		"motive": "./dist/index.js"
+	},
+	"keywords": ["Template"],
+	"author": "Ruben Nijhuis",
 	"license": "ISC",
 	"type": "module",
 	"dependencies": {
