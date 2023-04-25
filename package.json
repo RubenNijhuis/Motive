@@ -2,19 +2,21 @@
 	"name": "@ruben__nijhuis/motive",
 	"version": "1.0.1",
 	"description": "A simple template generator",
-	"main": "index.js",
+	"main": "dist/index.js",
 	"scripts": {
 		"build": "npx tsc",
 		"test": "node ./dist/index.js"
 	},
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/RubenNijhuis/Motive.git"
-    },
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/RubenNijhuis/Motive.git"
+	},
 	"bin": {
 		"motive": "./dist/index.js"
 	},
-	"keywords": ["Template"],
+	"keywords": [
+		"Template"
+	],
 	"author": "Ruben Nijhuis",
 	"license": "ISC",
 	"type": "module",

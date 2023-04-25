@@ -44,7 +44,7 @@ class TemplateFile {
 		if (this.templateConfig.config?.fileName) {
 			const { name, isVariable } = isVariableName(
 				this.templateConfig.config.fileName
-            );
+			);
 
 			// If its formatted like {{name}} we get it from our
 			// answers which can be merged from global and local
@@ -89,17 +89,17 @@ class TemplateFile {
 			throw new Error(
 				`No answers give yet for ${this.templateConfig.template}`
 			);
-        }
-        
-        Handlebars.registerHelper('loud', (str) => {
-            return str.toUpperCase();
-        })
+		}
 
-        const template = Handlebars.compile(this.preContent);
+		Handlebars.registerHelper("loud", (str) => {
+			return str.toUpperCase();
+		});
+
+		const template = Handlebars.compile(this.preContent);
 		const rendered = template(this.answers);
 		const fileName = this.getFileName();
-        const outputPath = path.join(outputFolder, fileName);
-    
+		const outputPath = path.join(outputFolder, fileName);
+
 		fs.writeFileSync(outputPath, rendered);
 	}
 }

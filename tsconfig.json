@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
-        "module": "NodeNext",
+		"module": "NodeNext",
 		"moduleResolution": "nodenext",
 		"target": "ES2020",
 		"sourceMap": true,
 		"outDir": "dist",
 		"rootDir": "src",
 		"strict": true,
-		"esModuleInterop": true,
+		"esModuleInterop": true
 	}
 }

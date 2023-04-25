@@ -20,11 +20,11 @@ import { getFilesFromTemplateOptions, getOptionsConfig } from "./utils.js";
 
 try {
 	const templateFolder = path.join(__dirname, "..", "templates");
-    const templateNames = fs.readdirSync(templateFolder);
-    
-    if (templateNames.length === 0) {
-        throw Error("You haven't created any templates yet");
-    }
+	const templateNames = fs.readdirSync(templateFolder);
+
+	if (templateNames.length === 0) {
+		throw Error("You haven't created any templates yet");
+	}
 
 	let selectedTemplate = await askTemplateName(templateNames);
 
@@ -43,13 +43,12 @@ try {
 
 	for (const file of templateFiles) {
 		await file.renderOutput(pwd);
-    }
-
+	}
 } catch (err) {
-    if (err instanceof Error) {
-        console.error(`Error: ${err.message}`);
-        console.error(err);
-    } else {
-        console.log(err);
-    }
+	if (err instanceof Error) {
+		console.error(`Error: ${err.message}`);
+		console.error(err);
+	} else {
+		console.log(err);
+	}
 }

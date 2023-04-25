@@ -88,10 +88,13 @@ export const getOptionsConfig = async (
 	}
 };
 
-export const isVariableName = (
-	str: string
-): { name: string; isVariable: boolean } => {
-	let returnable = {
+type isVariableNameCheck = {
+	name: string;
+	isVariable: boolean;
+};
+
+export const isVariableName = (str: string): isVariableNameCheck => {
+	let returnable: isVariableNameCheck = {
 		name: "",
 		isVariable: false,
 	};

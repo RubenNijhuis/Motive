@@ -102,3 +102,6 @@ An example of a template file
     return (*this);
 }
 ```
+
+## TODOS
+- Make it easy to host your own templates
